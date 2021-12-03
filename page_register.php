@@ -64,6 +64,7 @@ require('include/registration_handler.php');
                         </div>
                         <div class="col-xl-6 ml-auto mr-auto">
                             <div class="card p-4 rounded-plus bg-faded">
+<<<<<<< Updated upstream
                                 <?php if (display_flash_message('error_get_user_email_msg')) { ?>
                                     <div class="alert alert-danger text-dark" role="alert">
                                         <?php display_flash_message('error_get_user_email_msg'); ?>
@@ -74,6 +75,9 @@ require('include/registration_handler.php');
                                         <?php display_flash_message('success_add_the_user_to_the_table_msg'); ?>
                                     </div>
                                 <?php } ?>
+=======
+                                <?php display_flash_message('danger', 'danger'); ?>
+>>>>>>> Stashed changes
                                 <form id="js-login" novalidate="" action="include/registration_handler.php"
                                       method="POST">
                                     <div class="form-group">

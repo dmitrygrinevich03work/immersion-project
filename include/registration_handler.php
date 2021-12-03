@@ -16,10 +16,18 @@ function set_flash_message($name, $messages)//flash message creation function
     $_SESSION[$name] = $messages;
 }
 
-function display_flash_message($name)//flash message output function
+function display_flash_message($name, $kay)//flash message output function
 {
+<<<<<<< Updated upstream
     echo $_SESSION[$name];
     unset_flash_message($name);
+=======
+    if (isset($_SESSION[$name])) {
+        echo "<div class=\"alert alert-{$kay} text-dark\" role=\"alert\">{$_SESSION[$name]}</div>";
+        unset_flash_message($name);
+    }
+
+>>>>>>> Stashed changes
 }
 
 function unset_flash_message($name)//flash message deletion function
