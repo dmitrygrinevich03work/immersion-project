@@ -18,8 +18,11 @@ function set_flash_message($name, $messages)//flash message creation function
 
 function display_flash_message($name)//flash message output function
 {
-    echo $_SESSION[$name];
-    unset_flash_message($name);
+    if (isset($_SESSION[$name])) {
+        echo "<div class=\"alert alert-{$name} text-dark\" role=\"alert\">{$_SESSION[$name]}</div>";
+        unset_flash_message($name);
+    }
+
 }
 
 function unset_flash_message($name)//flash message deletion function
@@ -35,27 +38,30 @@ if (isset($_POST['submit'])) {
 
     function select_email($email)//The function of checking mail in the database
     {
-        $statment = connect()->query("SELECT * FROM users WHERE email=('$email')");
+        $statment = connect()->prepare("SELECT * FROM users WHERE email=:email");
+        $statment->execute(["email" => $email]);
         $users = $statment->fetch(PDO::FETCH_ASSOC);
         return $users;
     }
 
     function add_user($email, $password)//user registration, adding a user to the database
     {
-        $password = password_hash($password,PASSWORD_DEFAULT);//Hash the password
-        $statement = connect()->prepare("INSERT INTO users (email, password) VALUES ('$email' , '$password')");
-        $statement->execute($_POST);
+        $statement = connect()->prepare("INSERT INTO users (email, password) VALUES (:email, :password)");
+        $statement->execute(["email" => $email,
+            "password" => password_hash($password, PASSWORD_DEFAULT)]);//Hash the password
         redirect_to('../page_register.php');
     }
 
+    $select_email = select_email($email);
+
     /* [ We fulfill the condition for checking and adding a new user ] */
-    if (!empty(select_email($email))) {
+    if (!empty($select_email)) {
         redirect_to('../page_register.php');
-        die(set_flash_message('error_get_user_email_msg', 'Notification! This email the address is already taken by another user.'));
+        die(set_flash_message('danger', 'Notification! This email the address is already taken by another user.'));
     } else {
         add_user($email, $password);
-        set_flash_message('success_add_the_user_to_the_table_msg', 'You have successfully registered!');
-        redirect_to('../page_register.php');
+        set_flash_message('success', 'You have successfully registered!');
+        redirect_to('../page_login.php');
     }
 
 }

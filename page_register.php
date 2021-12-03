@@ -41,7 +41,7 @@ require('include/registration_handler.php');
                     <span class="text-white opacity-50 ml-auto mr-2 hidden-sm-down">
                             Уже зарегистрированы?
                         </span>
-                    <a href="page_login.html" class="btn-link text-white ml-auto ml-sm-0">
+                    <a href="page_login.php" class="btn-link text-white ml-auto ml-sm-0">
                         Войти
                     </a>
                 </div>
@@ -64,16 +64,7 @@ require('include/registration_handler.php');
                         </div>
                         <div class="col-xl-6 ml-auto mr-auto">
                             <div class="card p-4 rounded-plus bg-faded">
-                                <?php if (display_flash_message('error_get_user_email_msg')) { ?>
-                                    <div class="alert alert-danger text-dark" role="alert">
-                                        <?php display_flash_message('error_get_user_email_msg'); ?>
-                                    </div>
-                                <?php } ?>
-                                <?php if (display_flash_message('success_add_the_user_to_the_table_msg')) { ?>
-                                    <div class="alert alert-success text-dark" role="alert">
-                                        <?php display_flash_message('success_add_the_user_to_the_table_msg'); ?>
-                                    </div>
-                                <?php } ?>
+                                <?php display_flash_message('danger'); ?>
                                 <form id="js-login" novalidate="" action="include/registration_handler.php"
                                       method="POST">
                                     <div class="form-group">
