@@ -1,5 +1,6 @@
 <?php session_start();
-require("include/registration_handler.php"); ?>
+require("include/registration_handler.php");
+require('include/login_handler.php');?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -36,14 +37,15 @@ require("include/registration_handler.php"); ?>
     </div>
     <div class="card p-4 border-top-left-radius-0 border-top-right-radius-0">
     <?php display_flash_message('success_add_the_user_to_the_table_msg', 'success'); ?>
+    <?php display_flash_message('authorisation_error', 'danger'); ?>
         <form action="include/login_handler.php" method="POST">
             <div class="form-group">
                 <label class="form-label" for="username">Email</label>
-                <input type="email" id="username" class="form-control" placeholder="Эл. адрес" value="">
+                <input type="email" id="username" name="email" class="form-control" placeholder="Эл. адрес" value="">
             </div>
             <div class="form-group">
                 <label class="form-label" for="password">Пароль</label>
-                <input type="password" id="password" class="form-control" placeholder="">
+                <input type="password" id="password" name="password" class="form-control" placeholder="">
             </div>
             <div class="form-group text-left">
                 <div class="custom-control custom-checkbox">
@@ -51,7 +53,7 @@ require("include/registration_handler.php"); ?>
                     <label class="custom-control-label" for="rememberme">Запомнить меня</label>
                 </div>
             </div>
-            <button type="submit" class="btn btn-default float-right">Войти</button>
+            <button type="submit" name="submit" class="btn btn-default float-right">Войти</button>
         </form>
     </div>
     <div class="blankpage-footer text-center">
