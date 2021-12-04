@@ -1,7 +1,3 @@
-<?php
-session_start();
-require('include/login_handler.php');
-?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -48,8 +44,6 @@ require('include/login_handler.php');
                     <div class="card mb-g rounded-top">
                         <div class="row no-gutters row-grid">
                             <div class="col-12">
-                                <?php display_flash_message('authorization_successful', 'success');?>
-                                <?php var_dump($_SESSION);die(); ?>
                                 <div class="d-flex flex-column align-items-center justify-content-center p-4">
                                     <img src="img/demo/avatars/avatar-admin-lg.png" class="rounded-circle shadow-2 img-thumbnail" alt="">
                                     <h5 class="mb-0 fw-700 text-center mt-3">

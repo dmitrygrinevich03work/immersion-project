@@ -38,6 +38,7 @@ require('include/login_handler.php');?>
     <div class="card p-4 border-top-left-radius-0 border-top-right-radius-0">
     <?php display_flash_message('success_add_the_user_to_the_table_msg', 'success'); ?>
     <?php display_flash_message('authorisation_error', 'danger'); ?>
+    <?php display_flash_message('error_msg_logout', 'danger'); ?>
         <form action="include/login_handler.php" method="POST">
             <div class="form-group">
                 <label class="form-label" for="username">Email</label>

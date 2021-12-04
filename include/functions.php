@@ -38,8 +38,41 @@ function select_email($email)//The function of checking mail in the database
 
 function add_user($email, $password)//user registration, adding a user to the database
 {
-    $statement = connect()->prepare("INSERT INTO users (email, password) VALUES (:email, :password)");
-    $statement->execute(["email" => $email,
-        "password" => password_hash($password, PASSWORD_DEFAULT)]);//Hash the password
+    $statement = connect()->prepare("INSERT INTO users (user_name, email, password, role) VALUES (:user_name, :email, :password, :role)");
+    $statement->execute(["user_name" => "user",
+        "email" => $email,
+        "password" => password_hash($password, PASSWORD_DEFAULT),//Hash the password
+        "role" => "user"]);
     redirect_to('../page_register.php');
+}
+
+function is_logged_in()
+{
+    if (isset($_SESSION['user']) && !empty($_SESSION['user'])) {
+        return true;
+    } else {
+        return false;
+    }
+}
+
+function is_admin()
+{
+    if ($_SESSION['user']['role'] == "admin") {
+        return true;
+    }
+}
+
+function is_user()
+{
+    if ($_SESSION['user']['role'] == "user") {
+        return true;
+    }
+}
+
+function select_all_users()//The function of checking mail in the database
+{
+    $statment = connect()->prepare("SELECT * FROM users");
+    $statment->execute();
+    $all_user = $statment->fetchAll(PDO::FETCH_ASSOC);
+    return $all_user;
 }
