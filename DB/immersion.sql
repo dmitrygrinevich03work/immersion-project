@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Хост: 127.0.0.1:3306
--- Час створення: Гру 03 2021 р., 22:21
+-- Час створення: Гру 04 2021 р., 22:01
 -- Версія сервера: 8.0.15
 -- Версія PHP: 7.3.9
 
@@ -30,16 +30,20 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `users` (
   `id` int(11) NOT NULL,
-  `email` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
-  `password` varchar(255) COLLATE utf8mb4_general_ci NOT NULL
+  `user_name` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
+  `email` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
+  `password` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
+  `role` varchar(255) COLLATE utf8mb4_general_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Дамп даних таблиці `users`
 --
 
-INSERT INTO `users` (`id`, `email`, `password`) VALUES
-(25, 'dmitrygridsfewfnevich03@gmail.com', '$2y$10$slVShBJmLEHxxg0wZQ13ueo8H9O2U6Em15S8Z6X62yOsCgX4BS86O');
+INSERT INTO `users` (`id`, `user_name`, `email`, `password`, `role`) VALUES
+(1, 'Dmityrgrinevich', 'dmitrygrinevich03@gmail.com', '$2y$10$l6dxLMdwqUTrsgVVLGU03O4AecXa.Nsyp3RqOo45f0jRY8ERxKTGK', 'admin'),
+(2, 'user', 'ewfwef@gmail.com', '$2y$10$/ZWzXK.XR9ZHIUFPjRFQ0eQ4RCqokX7lx8anzVP2.67RZKr637r/S', 'user'),
+(3, '123', '123@gmail.com', '$2y$10$8arYfY3N28hdZcGhftnMDOQMLLozyb26uL9G6zg9m4yOY9AAyzVA6', 'admin');
 
 --
 -- Індекси збережених таблиць
@@ -59,7 +63,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT для таблиці `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
