@@ -62,6 +62,15 @@ function is_admin()
     }
 }
 
+function is_logged_and_admin()
+{
+    if(isset($_SESSION['user']) && $_SESSION['user']['role'] == "admin"){
+        return true;
+    } else {
+        return false;
+    }
+}
+
 function is_user()
 {
     if ($_SESSION['user']['role'] == "user") {
