@@ -85,3 +85,4 @@ function select_all_users()//The function of checking mail in the database
     $all_user = $statment->fetchAll(PDO::FETCH_ASSOC);
     return $all_user;
 }
+
