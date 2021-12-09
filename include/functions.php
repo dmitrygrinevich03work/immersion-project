@@ -38,12 +38,14 @@ function select_email($email)//The function of checking mail in the database
 
 function add_user($email, $password)//user registration, adding a user to the database
 {
-    $statement = connect()->prepare("INSERT INTO users (user_name, email, password, role) VALUES (:user_name, :email, :password, :role)");
-    $statement->execute(["user_name" => "user",
+    $connect = connect();
+    $statement = $connect->prepare("INSERT INTO users (email, password) VALUES (:email, :password)");
+    $statement->execute([
         "email" => $email,
         "password" => password_hash($password, PASSWORD_DEFAULT),//Hash the password
-        "role" => "user"]);
-    redirect_to('../page_register.php');
+        ]);
+    $_SESSION['user_id'] = $connect->lastInsertId();
+    return true;
 }
 
 function is_logged_in()
@@ -64,7 +66,7 @@ function is_admin()
 
 function is_logged_and_admin()
 {
-    if(isset($_SESSION['user']) && $_SESSION['user']['role'] == "admin"){
+    if (isset($_SESSION['user']) && $_SESSION['user']['role'] == "admin") {
         return true;
     } else {
         return false;

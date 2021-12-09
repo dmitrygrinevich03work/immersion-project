@@ -59,6 +59,7 @@ if (!is_logged_in()) {
         <!--            Профиль успешно обновлен.-->
         <!--        </div>-->
         <?php display_flash_message('authorization_successful', 'success'); ?>
+        <?php display_flash_message('success_create_user', 'success'); ?>
         <div class="subheader">
             <h1 class="subheader-title">
                 <i class='subheader-icon fal fa-users'></i> Список пользователей
