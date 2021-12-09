@@ -29,12 +29,17 @@ if (!is_logged_and_admin()) {
                 </li>
             </ul>
             <ul class="navbar-nav ml-auto">
-                <li class="nav-item">
-                    <a class="nav-link" href="page_login.html">Войти</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Выйти</a>
-                </li>
+                <?php if (!is_logged_in()) { ?>
+                    <li class="nav-item">
+                        <a class="nav-link" href="../page_login.php"> Войти</a>
+                    </li>
+                <?php } else { ?>
+                    <li class="nav-item">
+                        <a class="nav-link"
+                           href="include/users_handler.php?id=<?php echo $_SESSION['user']; ?>"
+                           onclick="confirm('Вы уверены что хотите выйти?');">Выйти</a>
+                    </li>
+                <?php } ?>
             </ul>
         </div>
     </nav>
@@ -43,13 +48,9 @@ if (!is_logged_and_admin()) {
             <h1 class="subheader-title">
                 <i class='subheader-icon fal fa-plus-circle'></i> Добавить пользователя
             </h1>
-
-
-
         </div>
-        <?php ?>
-        <?php display_flash_message('error_select_email', 'danger'); ?>
-        <?php display_flash_message('error_add_user', 'success'); ?>
+        <?php display_flash_message('error_select_email', 'danger'); // Если почта занята выйдет ошибка! ?>
+        <?php display_flash_message('error_add_user', 'success'); // Если юзер добавлен выйдет сообщение! ?>
         <form action="include/create_users_handler.php" method="POST" enctype="multipart/form-data">
             <div class="row">
                 <div class="col-xl-6">
@@ -110,10 +111,10 @@ if (!is_logged_and_admin()) {
                                 <!-- status -->
                                 <div class="form-group">
                                     <label class="form-label" for="example-select">Выберите статус</label>
-                                    <select class="form-control" id="example-select">
-                                        <option>Онлайн</option>
-                                        <option>Отошел</option>
-                                        <option>Не беспокоить</option>
+                                    <select class="form-control" id="example-select" name="status">
+                                        <option value="0">Онлайн</option>
+                                        <option value="1">Отошел</option>
+                                        <option value="2">Не беспокоить</option>
                                     </select>
                                 </div>
 

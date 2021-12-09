@@ -1,4 +1,5 @@
 <?php
+
 function connect()//The function of connecting to the database via PDO
 {
     return new PDO('mysql:host=localhost;dbname=immersion;charset=utf8', 'root', '');
@@ -48,7 +49,7 @@ function add_user($email, $password)//user registration, adding a user to the da
     return true;
 }
 
-function is_logged_in()
+function is_logged_in() //If the person is authorized
 {
     if (isset($_SESSION['user']) && !empty($_SESSION['user'])) {
         return true;
@@ -57,14 +58,14 @@ function is_logged_in()
     }
 }
 
-function is_admin()
+function is_admin()//If the admin
 {
     if ($_SESSION['user']['role'] == "admin") {
         return true;
     }
 }
 
-function is_logged_and_admin()
+function is_logged_and_admin()//If the admin is also logged in
 {
     if (isset($_SESSION['user']) && $_SESSION['user']['role'] == "admin") {
         return true;
@@ -73,7 +74,7 @@ function is_logged_and_admin()
     }
 }
 
-function is_user()
+function is_user()//If the user
 {
     if ($_SESSION['user']['role'] == "user") {
         return true;
@@ -88,3 +89,54 @@ function select_all_users()//The function of checking mail in the database
     return $all_user;
 }
 
+function create_image($name, $tmp_name)//Loading an image
+{
+    $connect = connect();
+    $name_image = uniqid() . $name;
+    move_uploaded_file($tmp_name, '../uploads/' . $name_image);
+    $statment = $connect->prepare('UPDATE users SET image=:name_image WHERE id=:id');
+    $statment->execute([
+        "id" => $_SESSION['user_id'],
+        "name_image" => $name_image,
+    ]);
+    return true;
+}
+
+function create_info($user_name, $work, $phone, $address)//General information
+{
+    $connect = connect();
+    $sql = "UPDATE users SET user_name=:user_name, work=:work , phone=:phone , address=:address WHERE id=:id";
+    $statment = $connect->prepare($sql);
+    $statment->execute([
+        "id" => $_SESSION['user_id'],
+        "user_name" => $user_name,
+        "work" => $work,
+        "phone" => $phone,
+        "address" => $address
+    ]);
+    return true;
+}
+
+function create_social_network($vk, $telegram, $instagram)//Social networks
+{
+    $connect = connect();
+    $statment = $connect->prepare("UPDATE users SET vk=:vk, telegram=:telegram , instagram=:instagram WHERE id=:id");
+    $statment->execute([
+            "id" => $_SESSION['user_id'],
+            "vk" => $vk,
+            "telegram" => $telegram,
+            "instagram" => $instagram]
+    );
+    return true;
+}
+
+function status($status)//User status
+{
+    $connect = connect();
+    $statment = $connect->prepare("UPDATE users SET status=:status WHERE id=:id");
+    $statment->execute([
+        "id" => $_SESSION['user_id'],
+        "status" => $status
+    ]);
+    return true;
+}
