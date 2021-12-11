@@ -24,13 +24,14 @@ $vk = $_POST['vk'];
 $telegram = $_POST['telegram'];
 $instagram = $_POST['instagram'];
 
-if (isset($btn)) {
-    if (!select_email($email)) { //Проверяем почту
-        if (add_user($email, $password)) { //Добавляем юзера
-            if (create_info($user_name, $work, $phone, $address)) { //Добавляем общую информацию юзеру
-                if (status($status)) { //Устанавливаем статус юзеру
-                    if (create_image($name, $tmp_name)) { //Загружаем картинку юзера
-                        if (create_social_network($vk, $telegram, $instagram) == true) { //Добавляем ссылки соц.сетей юзеру
+if (isset($btn)) {//Если была нажата кнопка "Добавить" то я выполняю седущее.
+    if (!select_email($email)) { //Проверяем почту если почта не найдена , то вызываем фенкцию "Создать юзера(add_user)"
+                                //Иначе Если почта существует в БД то выводим сообщение с ошибкой на странице create_user.php
+        if (add_user($email, $password)) { //Добавляем юзера, если юзер вернул true то переходим дальше.
+            if (create_info($user_name, $work, $phone, $address)) { //Добавляем общую информацию юзеру, если фенкция вернула true то переходим дальше.
+                if (status($status)) { //Устанавливаем статус юзеру, если фенкция вернула true то переходим дальше.
+                    if (create_image($name, $tmp_name)) { //Загружаем картинку юзера, если фенкция вернула true то переходим дальше.
+                        if (create_social_network($vk, $telegram, $instagram) == true) { //Добавляем ссылки соц.сетей юзеру, если фенкция вернула true то переходим дальше.
                             set_flash_message('success_create_user', 'Вы успешно добавили Пользователя!');
                             unset_flash_message('user_id');//удаляем сессию с user_id
                             redirect_to('../users.php');
