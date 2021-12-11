@@ -20,7 +20,11 @@ if (isset($_POST['submit'])) {
         return false;
     }
     set_flash_message('authorization_successful', 'You have successfully logged in to the site!');
-    $_SESSION['user'] = $users;
+    $_SESSION['user'] = [
+        "id" => $users['id'],
+        "email" => $users['email'],
+        "role" => $users['role']
+    ];
     redirect_to('../users.php');
     return true;
 
