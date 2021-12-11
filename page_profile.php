@@ -1,4 +1,5 @@
 <?php
+session_start();
 require_once('include/functions.php');
 if (!is_logged_in()) {
     redirect_to("../page_login.php");
