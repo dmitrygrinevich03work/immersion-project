@@ -59,6 +59,8 @@ $user = $_SESSION['user'];
     <div class="row">
         <div class="col-lg-6 col-xl-6 m-auto">
             <!-- profile summary -->
+            <?php display_flash_message("success_edit_security_profile", "success"); ?>
+            <?php display_flash_message("success_edit_profile", "success"); ?>
             <div class="card mb-g rounded-top">
                 <div class="row no-gutters row-grid">
                     <div class="col-12">

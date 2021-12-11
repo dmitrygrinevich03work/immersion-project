@@ -108,7 +108,7 @@ function create_info($user_name, $work, $phone, $address) //General information
         "phone" => $phone,
         "address" => $address
     ]);
-    unset_flash_message('user_id');//удаляем сессию с user_id
+    unset_flash_message('user_id');//Delete session with user_id
     return true;
 }
 
@@ -136,7 +136,7 @@ function status($status) //User status
     return true;
 }
 
-function is_author($logged_user_id, $edit_user_id) //Проверка автор ли пользователь или нет
+function is_author($logged_user_id, $edit_user_id) //Checking whether the user is the author or not
 {
     if ($logged_user_id == $edit_user_id) {
         return true;
@@ -144,10 +144,22 @@ function is_author($logged_user_id, $edit_user_id) //Проверка автор
     return false;
 }
 
-function select_user_is_id($edit_user_id) // Получаем юзера по id
+function select_user_is_id($edit_user_id) // We get a user by id
 {
     $statment = connect()->prepare("SELECT * FROM users WHERE id=:id");
     $statment->execute(["id" => $edit_user_id]);
     $return_user_id = $statment->fetch(PDO::FETCH_ASSOC);
     return $return_user_id;
+}
+
+function edit_credentials($user_id, $email, $password) // Updating security for the user
+{
+    $connect = connect();
+    $statment = $connect->prepare("UPDATE users SET email=:email, password=:password WHERE id=:id");
+    $statment->execute([
+        "id" => $user_id,
+        "email" => $email,
+        "password" => password_hash($password, PASSWORD_DEFAULT),//Hash the password
+    ]);
+    return true;
 }
