@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Хост: 127.0.0.1:3306
--- Час створення: Гру 09 2021 р., 22:53
+-- Час створення: Гру 12 2021 р., 04:11
 -- Версія сервера: 8.0.15
 -- Версія PHP: 7.3.9
 
@@ -21,6 +21,26 @@ SET time_zone = "+00:00";
 --
 -- База даних: `immersion`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Структура таблиці `status`
+--
+
+CREATE TABLE `status` (
+  `id` int(11) NOT NULL,
+  `name` varchar(255) COLLATE utf8mb4_general_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Дамп даних таблиці `status`
+--
+
+INSERT INTO `status` (`id`, `name`) VALUES
+(0, 'Онлайн'),
+(1, 'Отошел'),
+(2, 'Не беспокоить');
 
 -- --------------------------------------------------------
 
@@ -49,12 +69,19 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `user_name`, `email`, `password`, `image`, `status`, `work`, `phone`, `address`, `vk`, `telegram`, `instagram`, `role`) VALUES
-(36, '', 'dmitrygrinevich03@gmail.com', '$2y$10$P67I7Bv9/zw2YQc2IjhP2OndY0MHkJh//87CsIGs9JGAvfQpGNQ7u', '', 0, '', NULL, '', '', '', '', 'admin'),
-(38, 'Vasya', 'ewfwef@gmail.com', '$2y$10$3pZaC/C3iD3ae/srjrjr5eCnNRrUBhKonChBZjdAfbcoHlg2F4sZS', '61b25a96dfdd61com.png', 2, 'Workkkk', 988111, 'HelloAddress111', 'vk', 'tg', 'ins', 'user');
+(43, 'Dmitry', 'dmitrygrinevich03@gmail.com', '$2y$10$cIwtiKoeETDaCX49U643ae4/toMGZIDKLqUeMyX/NoJvgI7oIGJia', '1com.png', 0, '123', 123, '123', '', '', '', 'admin'),
+(44, '', 'ewfwef@gmail.com', '$2y$10$x9lQGDo2b5SIMubEHMyEuOLckIwtRTVHCMa0zbQZxo1EPRHxhi4Qe', NULL, 0, '', NULL, '', '', '', '', 'user'),
+(45, '', '123@gmail.com', '$2y$10$2TuvVPP3VzRe7ROITlao5O4KVuQLKeVkchnu5c/DindpxFH7VYRMy', NULL, 0, '', NULL, '', '', '', '', 'user');
 
 --
 -- Індекси збережених таблиць
 --
+
+--
+-- Індекси таблиці `status`
+--
+ALTER TABLE `status`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Індекси таблиці `users`
@@ -67,10 +94,16 @@ ALTER TABLE `users`
 --
 
 --
+-- AUTO_INCREMENT для таблиці `status`
+--
+ALTER TABLE `status`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
 -- AUTO_INCREMENT для таблиці `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=41;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=46;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
