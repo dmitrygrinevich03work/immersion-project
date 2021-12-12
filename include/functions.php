@@ -163,3 +163,11 @@ function edit_credentials($user_id, $email, $password) // Updating security for 
     ]);
     return true;
 }
+
+function return_status() //Load all statuses from the database
+{
+    $statmen = connect()->prepare("SELECT * FROM status");
+    $statmen->execute();
+    $return_status = $statmen->fetchAll(PDO::FETCH_ASSOC);
+    return $return_status;
+}
