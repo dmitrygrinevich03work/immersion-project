@@ -61,6 +61,7 @@ if (!is_logged_in()) {
         <?php display_flash_message('authorization_successful', 'success'); //Если авторизация успешна , выйдет сообщение!  ?>
         <?php display_flash_message('success_create_user', 'success'); //Если пользователь добавлен администратором успешно, выйдет сообщение!  ?>
         <?php display_flash_message('is_author_error', 'danger'); //Если польователь хочет отредактировать чужой профиль, выводи ошибку!  ?>
+        <?php display_flash_message("success_delete_user", "success"); //Выводим сообщение что пользователь успешно удалён! ?>
         <div class="subheader">
             <h1 class="subheader-title">
                 <i class='subheader-icon fal fa-users'></i> Список пользователей
@@ -123,7 +124,7 @@ if (!is_logged_in()) {
                                                 <i class="fa fa-camera"></i>
                                                 Загрузить аватар
                                             </a>
-                                            <a href="#" class="dropdown-item"
+                                            <a href="include/delete_user.php?id=<?php echo $users['id']; ?>" class="dropdown-item"
                                                onclick="return confirm('are you sure?');">
                                                 <i class="fa fa-window-close"></i>
                                                 Удалить
@@ -145,7 +146,7 @@ if (!is_logged_in()) {
                                                 <i class="fa fa-camera"></i>
                                                 Загрузить аватар
                                             </a>
-                                            <a href="#" class="dropdown-item"
+                                            <a href="include/delete_user.php?id=<?php echo $users['id']; ?>" class="dropdown-item"
                                                onclick="return confirm('are you sure?');">
                                                 <i class="fa fa-window-close"></i>
                                                 Удалить

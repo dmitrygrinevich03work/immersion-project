@@ -171,3 +171,10 @@ function return_status() //Load all statuses from the database
     $return_status = $statmen->fetchAll(PDO::FETCH_ASSOC);
     return $return_status;
 }
+
+function delete_user($user_id)// Delete the user
+{
+    $statmen = connect()->prepare("DELETE FROM users WHERE id=:id");
+    $statmen->execute(["id" => $user_id]);
+    return true;
+}
